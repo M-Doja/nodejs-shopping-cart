@@ -6,12 +6,8 @@ body, html {
 
 #brandName {text-decoration: none;color:#000;font-weight:bold;}
 .bg {
-    /* The image used */
     background-image: url("/images/shoes.jpg");
-
-    /* Full height */
     height: 100%;
-
     /* Center and scale the image nicely */
     background-position: center;
     background-repeat: no-repeat;
