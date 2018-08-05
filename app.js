@@ -1,23 +1,23 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var expressHbs = require('express-handlebars');
-var mongoose = require('mongoose');
-var session = require('express-session');
-var passport = require('passport');
-var flash = require('connect-flash');
-var validator = require('express-validator');
-var MongoStore = require('connect-mongo')(session);
+const express = require('express');
+const path = require('path');
+const favicon = require('serve-favicon');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
+const expressHbs = require('express-handlebars');
+const mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
+const flash = require('connect-flash');
+const validator = require('express-validator');
+const MongoStore = require('connect-mongo')(session);
+const routes = require('./routes/index');
+const userRoutes = require('./routes/user');
 
-var routes = require('./routes/index');
-var userRoutes = require('./routes/user');
+const app = express();
 
-var app = express();
-
-mongoose.connect(process.env.MONGO_DB_URI);
+// mongoose.connect(process.env.MONGO_DB_URI);
+mongoose.connect('mongodb://localhost:27017/TKC-DB', (err, db) => {console.log("db connected");});
 require('./config/passport');
 
 // view engine setup
@@ -31,8 +31,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(validator());
 app.use(cookieParser());
 app.use(session({
-  secret: 'mysupersecret', 
-  resave: false, 
+  secret: 'retrfyguhpi76fugv',
+  resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { maxAge: 180 * 60 * 1000 }
@@ -53,7 +53,7 @@ app.use('/', routes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  const err = new Error('Not Found');
   err.status = 404;
   next(err);
 });

@@ -1,0 +1,50 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    background-color: #eee;
+}
+
+#brandName {text-decoration: none;color:#000;font-weight:bold;}
+.bg {
+    /* The image used */
+    background-image: url("/images/shoes.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 300px;
+    margin-bottom:25px;
+}
+.navbar-default .navbar-nav>li>a {
+  color: #000
+}
+.badge {
+  background-color: #000;
+}
+.navbar-default {
+  margin-bottom: 0;
+}
+.navbar {
+  background-color: #447c71;
+}
+.thumbnail img {
+    max-height: 150px;
+}
+
+.thumbnail .description {
+    color: #7f7f7f;
+}
+
+.price {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.container {
+  margin-top: 50px;
+}
+ /* body {margin-top:125px;} */

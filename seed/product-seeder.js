@@ -2,7 +2,9 @@ var Product = require('../models/product');
 
 var mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_DB_URI);
+// mongoose.connect(process.env.MONGO_DB_URI);mongodb://localhost:27017/TKC-DB
+
+mongoose.connect('mongodb://localhost:27017/TKC-DB');
 
 var products = [
   new Product({

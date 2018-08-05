@@ -4,6 +4,7 @@ var Cart = require('../models/cart');
 var User = require('../models/user');
 
 var Product = require('../models/product');
+// var Product = require('../seed/product-seeder');
 var Order = require('../models/order');
 
 /* GET home page. */
@@ -16,12 +17,62 @@ router.get('/', function(req, res, next) {
       productChunks.push(docs.slice(i, i + chunkSize));
     }
     res.render('shop/index', {
-      title: 'Carrinho de Compra',
+      title:'The Kicks Club',
       products: productChunks,
       successMsg: successMsg,
       noMessages: !successMsg
     });
   });
+});
+
+// -------------------------------------------------
+//       CLOUDINARY ACCT INFO
+// Dev_dbp1ccloud ~ pwd
+// devd-tkc ~ cloudname
+// 847436193153669 ~ API key
+//
+//  sample upload:
+// cloudinary.uploader
+//  .upload("sample.jpg",
+//    {
+//      "crop":"limit",
+//       "tags":"samples",
+//       "width":3000,
+//       "height":2000
+//     },
+//        function(result) {
+//            console.log(result)
+//        });
+//
+//
+//
+router.post('/product/create', (req, res, next) => {
+    let product = new Product(
+        {
+            name: req.body.itemName,
+            price: req.body.itemPrice
+        }
+    );
+    product.save(function (err) {
+        if (err) {
+            return next(err);
+        }
+        res.send('Product Created successfully')
+    })
+});
+
+router.post('/product/:id/update', (req, res, next) => {
+  Product.findByIdAndUpdate(req.params.id, {$set: req.body}, function (err, product) {
+        if (err) return next(err);
+        res.send('Product udpated.');
+    });
+});
+
+router.delete('/product/:id/delete', (req, res, next) => {
+  Product.findByIdAndRemove(req.params.id, function (err) {
+        if (err) return next(err);
+        res.send('Deleted successfully!');
+    })
 });
 
 router.get('/add-to-cart/:id', function(req, res, next) {
@@ -97,7 +148,7 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
     description: "Test Charge"
   }, function(err, charge) {
     if (err) {
-      req.flash('error', 'Não conseguimos finalizar sua compra!');
+      req.flash('error', 'We could not complete your purchase!');
       return res.redirect('/checkout');
     }
     var order = new Order({
@@ -108,7 +159,7 @@ router.post('/checkout', isLoggedIn, function(req, res, next) {
       paymentId: charge.id
     });
     order.save(function(err, result) {
-      req.flash('success', 'Compra realizada com sucesso!');
+      req.flash('success', 'Purchase made successfully!');
       req.session.cart = null;
       res.redirect('/');
     });

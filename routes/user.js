@@ -13,10 +13,10 @@ router.post('/removeUser', function(req, res, next) {
   User.findOneAndRemove({email: req.user.email}, function(err, success) {
     if(err) {
       console.log(err.message);
-      req.flash('error', 'Falha ao remover usuário!');
+      req.flash('error', 'Failed to remove user!');
     }
     if(success) {
-      req.flash('success', 'Usuário removido com sucesso!');
+      req.flash('success', 'User removed  sucessfully!');
       res.redirect('/');
     }
   });
@@ -60,12 +60,12 @@ router.post('/profile', function(req, res, next) {
       doc.name = req.body.name;
       doc.state = req.body.state;
       doc.city = req.body.city;
-      
+
       doc.save();
 
     });
   } else {
-    console.log("email inválido");
+    console.log("email invalid");
   }
 
   if (req.session.oldUrl) {

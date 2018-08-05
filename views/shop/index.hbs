@@ -1,3 +1,7 @@
+<div class="bg">
+  <h1 style="font-family:'Permanent Marker', cursive; color:yellow; text-align:center; padding-top:50px;font-size:75px;text-shadow:1.5px 1.5px 3px #444;margin-bottom:10px;">The Kicks Club</h1>
+  <p style="font-family:'Permanent Marker', cursive; color:white; text-align:center; padding-top:5px;font-size:25px;text-shadow:1.5px 1.5px 3px #444;margin-bottom:10px;">Buy & Sell High Quality Pre-Owned Shoes</p>
+</div>
 <div class="row">
     <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
         <div id="success" class="alert alert-success" {{#if noMessages}}hidden{{/if}}>
@@ -16,8 +20,8 @@
                         <h3>{{ this.title }}</h3>
                         <p class="description">{{ this.description }}</p>
                         <div class="clearfix">
-                            <div class="price pull-left">R${{ this.price }}</div>
-                            <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Adicionar ao carrinho</a>
+                            <div class="price pull-left">${{ this.price }}</div>
+                            <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Add To Cart</a>
                         </div>
                     </div>
                 </div>
